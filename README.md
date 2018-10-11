@@ -1,24 +1,25 @@
-# README
+User
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+  name:string
+  email:string
+  password:string
+  manager:boolean
 
-Things you may want to cover:
+  has_many :sales
+  has_many :products, through: :sales
 
-* Ruby version
+Product
 
-* System dependencies
+  title:string
+  price:float
+  commission:float
+  manager_id:integer
 
-* Configuration
+  has_many :sales
+  has_many :users, through: :sales
 
-* Database creation
+Sale
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+  quantity:integer
+  belongs_to :product
+  belongs_to :user

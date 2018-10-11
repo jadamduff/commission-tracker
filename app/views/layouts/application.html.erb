@@ -7,9 +7,43 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <% if @js %>
+      <% @js.each do |script| %>
+        <%= javascript_include_tag script, 'data-turbolinks-track': 'reload' %>
+      <% end %>
+    <% end %>
   </head>
 
   <body>
+    <div class="header">
+      <div class="container">
+        <div class="logo">
+          <% if logged_in? %>
+            <%= link_to 'Commission Tracker', user_path(current_user) %>
+          <% else %>
+            <%= link_to 'Commission Tracker', root_path %>
+          <% end %>
+        </div>
+        <% if logged_in? %>
+          <% if current_user_is_manager? %>
+            <div class="button">
+              New Product
+            </div>
+          <% else %>
+          <div class="button">
+            New Sale
+          </div>
+          <% end %>
+        <% end %>
+        <div class="logout">
+          <% if logged_in? %>
+            <%= link_to 'Logout', logout_path %>
+          <% else %>
+            <%= link_to 'Login', login_path %>
+          <% end %>
+        </div>
+      </div>
+    </div>
     <%= yield %>
   </body>
 </html>

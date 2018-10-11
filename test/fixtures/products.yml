@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  price: 1.5
+  commission: 1.5
+  manager_id: 1
+
+two:
+  title: MyString
+  price: 1.5
+  commission: 1.5
+  manager_id: 1

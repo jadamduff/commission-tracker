@@ -1,2 +1,40 @@
 module ApplicationHelper
+
+  def current_user
+    return unless session[:user_id]
+    @current_user ||= User.find(session[:user_id])
+  end
+
+  def logged_in?
+    !!current_user
+  end
+
+  def require_login
+    redirect_to login_path if !logged_in?
+  end
+
+  def is_current_users_profile?
+    current_user.id == @user.id
+  end
+
+  def is_current_users_employee?
+    current_user.employees.include?(@user)
+  end
+
+  def is_employees_manager?
+    @user.manager_id != nil && current_user.id == @user.manager_id
+  end
+
+  def is_managers_profile?
+    @user.is_manager? && current_user.manager_id == @user.id
+  end
+
+  def current_user_is_manager?
+    current_user.is_manager? == true
+  end
+
+  def has_employees?
+    @user.is_manager? && !@user.employees.empty?
+  end
+
 end

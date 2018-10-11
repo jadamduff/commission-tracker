@@ -1,0 +1,68 @@
+.form_box_md .field_with_errors {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  margin: 5px 0;
+  padding: 0;
+  color: red;
+}
+
+.form_box_md_container {
+  width: 300px;
+  margin: 30px auto 75px auto;
+  font-family: 'Bangers', sans-serif;
+  color: #424242;
+  font-size: 36px;
+  text-align: center;
+  padding: 20px 0 0 0 ;
+}
+
+.form_box_md {
+  border: 1px solid #eee;
+  border-radius: 3px;
+  padding: 20px 20px 15px 20px;
+  text-align: left;
+  background: #fff;
+  margin: 15px 0;
+}
+
+.form_box_md div {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  margin: 5px 0;
+  padding: 0;
+  color: #757575;
+}
+
+.form_box_md input[type=text] {
+  margin: 0 0 15px 0;
+  height: 40px;
+  width: 260px;
+  font-family: 'Open Sans', sans-serif;
+  color: #424242;
+  font-size: 18px;
+  padding: 10px;
+  outline: none;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.form_box_md input[type=password] {
+  margin: 0 0 15px 0;
+  height: 40px;
+  width: 260px;
+  font-family: 'Open Sans', sans-serif;
+  color: #424242;
+  font-size: 18px;
+  padding: 10px;
+  outline: none;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.form_box_md input[type=checkbox] {
+  margin-bottom: 20px
+}

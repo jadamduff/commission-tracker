@@ -1,0 +1,27 @@
+<div class="header_md_light_gray_skinny">
+  <%= 'Hi, ' if is_current_users_profile? %><%= @user.name %>
+</div>
+<div class="header_xs_dark_blue_skinny" style="margin: 25px 0 10px 0">
+  Products
+</div>
+<% if @products.empty? %>
+  <div class="full_width_white_box_container product_box clearfix" style="text-align: center">
+    <div class="color_bar" style="background: #39474a"></div>
+    <div class="empty">No products, yet.</div>
+  </div>
+<% else %>
+  <% @products.each do |product| %>
+    <div class="full_width_white_box_container product_box clearfix">
+      <div class="color_bar" style="background: <%= product.color %>"></div>
+      <div class="contents">
+        <% if current_user.id == @user.id %>
+          <%= link_to product.title, user_product_path(@user, product)%>
+        <% else %>
+          <%= product.title %>
+        <% end %>
+        <div class="right">$<%= product.formatted_price %></div>
+        <div class="sub"><%= product.commission_to_percent %>% Commission | <%= product.sales.count %> Sales | <%= product.revenue %> Total Revenue</div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
