@@ -18,9 +18,9 @@ class Product < ApplicationRecord
 
   def formatted_price
     if self.price % 1 == 0
-      return "#{self.price.to_i}"
+      return self.price.to_i
     else
-      return "#{'%.2f' % self.price.round(2)}"
+      return '%.2f' % self.price.round(2)
     end
   end
 

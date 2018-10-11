@@ -18,6 +18,14 @@
   vertical-align: middle;
 }
 
+.full_width_white_box_container .earnings {
+  font-family: 'Lato', sans-serif;
+  color: #4caf50;
+  font-size: 18px;
+  line-height: 81px;
+  vertical-align: middle;
+}
+
 .full_width_white_box_container .contents {
   font-family: 'Lato', sans-serif;
   color: #39474a;

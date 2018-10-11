@@ -24,8 +24,6 @@ class User < ApplicationRecord
     return "$#{total.round}"
   end
 
-  private
-
   def valid_manager
     if manager_id != nil && User.find(manager_id).manager == false
       errors.add(:manager_id, "There is no manager with that email address.")
@@ -36,6 +34,22 @@ class User < ApplicationRecord
     if manager == true && manager_id != nil
       errors.add(:manager, "Cannot be a manager and emplyee.")
     end
+  end
+
+  def earnings
+    total = 0
+    self.sales.each do |sale|
+      @total += sale.total
+    end
+    if total % 1 == 0
+      return total.to_i
+    else
+      return '%.2f' % total.round(2)
+    end
+  end
+
+  def display_earnings
+    "$#{self.earnings}"
   end
 
 end

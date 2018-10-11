@@ -9,6 +9,8 @@
   <div class="body_right">
     <% if @user.is_manager? %>
       <%= render 'users/manager_show_body_right' %>
-    <% end %>
+      <% else %>
+        <%= render 'users/employee_show_body_right' %>
+      <% end %>
   </div>
 </div>
