@@ -1,33 +1,5 @@
 <div class="container">
   <div class="form_box_md_container">
-    <%= form_for(@product) do |f| %>
-      <div class="form_box_md">
-        <div class="<%= "field_with_errors" if @product.errors.include?(:title) %>">
-          <%= f.label :title %>
-        </div>
-        <%= f.text_field :title, class: 'form_box_md_input_text' %>
-        <div class="<%= "field_with_errors" if @product.errors.include?(:price) %>">
-          <%= f.label :price %>
-        </div>
-        <%= f.text_field :price, class: 'form_box_md_input_text' %>
-        <div class="<%= "field_with_errors" if @product.errors.include?(:commission) %>">
-          <%= f.label :commission, 'Commission (percent)' %>
-        </div>
-        <%= f.text_field :commission, class: 'form_box_md_input_text' %>
-        <div class="<%= "field_with_errors" if @product.errors.include?(:color) %>">
-          <%= f.label :color %>
-        </div>
-        <div>
-          <div class="color_box" style=" background: #E53935"></div>
-          <div class="color_box" style=" background: #F57C00"></div>
-          <div class="color_box" style=" background: #FFEB3B"></div>
-          <div class="color_box" style=" background: #4CAF50"></div>
-          <div class="color_box" style=" background: #039BE5"></div>
-          <div class="color_box" style=" background: #5E35B1"></div>
-        </div>
-        <%= f.text_field :color, class: 'form_box_md_input_text' %>
-      </div>
-      <%= f.submit 'Add Product', class: 'form_full_btn' %>
-    <% end %>
+    <%= render 'new_form' %>
   </div>
 </div>
