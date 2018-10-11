@@ -23,4 +23,13 @@ class Product < ApplicationRecord
       return "#{'%.2f' % self.price.round(2)}"
     end
   end
+
+  def display_price
+    self.is_free? ? "Free" : "$#{self.formatted_price}"
+  end
+
+  def is_free?
+    self.price == 0
+  end
+
 end
