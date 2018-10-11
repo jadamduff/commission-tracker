@@ -17,7 +17,7 @@ class ProductsController < ApplicationController
     if @product.save
       redirect_to user_path(current_user)
     else
-      @js = ['products_new']
+      @js = ['products_form']
       render 'new'
     end
   end
@@ -37,7 +37,7 @@ class ProductsController < ApplicationController
     if @product.save
       redirect_to user_path(current_user)
     else
-      @js = ['products_new']
+      @js = ['products_form']
       render 'new'
     end
   end
