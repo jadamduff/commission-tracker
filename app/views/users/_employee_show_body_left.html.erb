@@ -1,0 +1,23 @@
+<div class="header_md_light_gray_skinny">
+  <%= 'Hi, ' if is_current_users_profile? %><%= @user.name %>
+</div>
+<div class="header_xs_dark_blue_skinny" style="margin: 25px 0 10px 0">
+  Sales
+</div>
+<% if @sales.empty? %>
+  <div class="full_width_white_box_container product_box clearfix" style="text-align: center">
+    <div class="color_bar" style="background: #39474a"></div>
+    <div class="empty">No sales, yet.</div>
+  </div>
+<% else %>
+  <% @sales.each do |sale| %>
+    <div class="full_width_white_box_container product_box clearfix">
+      <div class="color_bar" style="background: <%= product.color %>"></div>
+      <div class="contents">
+        <%= sale.product.title %>
+        <div class="right"></div>
+        <div class="sub"></div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

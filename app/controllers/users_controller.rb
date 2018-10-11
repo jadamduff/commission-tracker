@@ -20,8 +20,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    valid_page_view
     set_show_variables
+    valid_page_view
   end
 
 end

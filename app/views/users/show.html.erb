@@ -2,6 +2,8 @@
   <div class="body_left">
     <% if @user.is_manager? %>
       <%= render 'users/manager_show_body_left' %>
+    <% else %>
+      <%= render 'users/employee_show_body_left' %>
     <% end %>
   </div>
   <div class="body_right">
