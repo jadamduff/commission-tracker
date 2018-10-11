@@ -23,6 +23,10 @@
    box-sizing: border-box;
  }
 
+ a {
+   text-decoration: none;
+ }
+
  .container {
    width: 960px;
    margin: 0 auto;

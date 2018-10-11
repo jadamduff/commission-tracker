@@ -26,9 +26,11 @@
         </div>
         <% if logged_in? %>
           <% if current_user_is_manager? %>
-            <div class="button">
-              New Product
-            </div>
+            <%= link_to new_user_product_path(current_user) do %>
+              <div class="button">
+                New Product
+              </div>
+            <% end %>
           <% else %>
           <div class="button">
             New Sale
