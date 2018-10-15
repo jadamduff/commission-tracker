@@ -11,7 +11,7 @@
 <% else %>
   <div class="full_width_white_box_container clearfix">
     <% @employees.each do |employee| %>
-      <div class="employees clearfix"><%= link_to employee.name, user_employee_path(User.find(employee.manager_id), employee) %><div class="revenue"><%= employee.revenue %></div></div>
+      <div class="people clearfix"><%= link_to employee.name, user_employee_path(User.find(employee.manager_id), employee) %><div class="revenue"><%= employee.revenue %></div></div>
     <% end %>
   </div>
 <% end %>

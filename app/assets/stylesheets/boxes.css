@@ -58,7 +58,7 @@
   text-decoration: underline;
 }
 
-.full_width_white_box_container .employees {
+.full_width_white_box_container .people {
   font-family: 'Lato', sans-serif;
   font-size: 14px;
   margin: 20px;
@@ -71,12 +71,12 @@
   font-size: 14px;
 }
 
-.full_width_white_box_container .employees a {
+.full_width_white_box_container .people a {
   color: #39474a;
   text-decoration: none;
 }
 
-.full_width_white_box_container .employees a:hover {
+.full_width_white_box_container .people a:hover {
   color: #39474a;
   text-decoration: underline;
 }
