@@ -4,9 +4,11 @@ Rails.application.routes.draw do
   resources :users, only: [:create, :show] do
     resources :employees, only: [:show]
     resources :products, only: [:new, :show]
+    resources :sales, only: [:new, :show]
   end
 
   resources :products, only: [:create, :update]
+  resources :sales, only: [:create, :update]
   resources :sessions, only: [:new, :create, :destroy]
 
   get '/login', :to => 'sessions#new'
