@@ -2,6 +2,8 @@ class Sale < ApplicationRecord
   belongs_to :user
   belongs_to :product
 
+  validates_presence_of :product_id, :quantity
+
   def total
     total_a = self.product.price * self.quantity
     if total_a % 1 == 0

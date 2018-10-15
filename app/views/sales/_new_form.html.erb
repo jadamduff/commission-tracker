@@ -1,8 +1,9 @@
 <%= form_for(@sale) do |f| %>
   <div class="form_box_md">
-    <div class="<%= "field_with_errors" if @product.errors.include?(:quantity) %>">
+    <div class="<%= "field_with_errors" if @sale.errors.include?(:quantity) %>">
       <%= f.label :quantity %>
     </div>
     <%= f.text_field :quantity, class: 'form_box_md_input_text' %>
+  </div>
   <%= f.submit 'Add Sale', class: 'form_full_btn' %>
 <% end %>
