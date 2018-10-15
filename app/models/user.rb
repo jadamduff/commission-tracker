@@ -37,14 +37,14 @@ class User < ApplicationRecord
   end
 
   def earnings
-    total = 0
+    @total = 0
     self.sales.each do |sale|
-      @total += sale.total
+      @total += sale.total.to_i * sale.product.commission
     end
-    if total % 1 == 0
-      return total.to_i
+    if @total % 1 == 0
+      return @total.to_i
     else
-      return '%.2f' % total.round(2)
+      return '%.2f' % @total.round(2)
     end
   end
 

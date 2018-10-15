@@ -12,7 +12,7 @@
 <% else %>
   <% @sales.each do |sale| %>
     <div class="full_width_white_box_container product_box clearfix">
-      <div class="color_bar" style="background: <%= product.color %>"></div>
+      <div class="color_bar" style="background: <%= sale.product.color %>"></div>
       <div class="contents">
         <%= sale.product.title %>
         <div class="right"></div>

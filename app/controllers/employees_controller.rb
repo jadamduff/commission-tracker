@@ -20,7 +20,7 @@ class EmployeesController < ApplicationController
       @products = @user.products
     else
       @manager = User.find(@user.manager_id)
-      @products = @manager.products
+      @products = @user.products
       @sales = @user.sales
     end
   end

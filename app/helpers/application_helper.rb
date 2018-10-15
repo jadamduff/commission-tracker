@@ -22,7 +22,7 @@ module ApplicationHelper
   end
 
   def is_employees_manager?
-    @user.manager_id != nil && current_user.id == @user.manager_id
+    current_user.manager_id != nil && @user.id == current_user.manager_id
   end
 
   def is_managers_profile?

@@ -9,7 +9,7 @@ module UsersHelper
       @products = Product.where('manager_id = ?', @user.id)
     else
       @manager = User.find(@user.manager_id)
-      @products = @manager.products
+      @products = @user.products
       @sales = @user.sales
     end
   end
