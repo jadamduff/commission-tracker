@@ -3,11 +3,13 @@ class ProductsController < ApplicationController
   include ProductsHelper
 
   def new
+    redirect_to user_path(current_user) unless current_user.is_manager?
     @js = ['products_form']
     @product = Product.new
   end
 
   def create
+    redirect_to user_path(current_user) unless current_user.is_manager?
     @product = Product.new
     @product.title = params[:product][:title]
     @product.price = set_price
@@ -23,6 +25,7 @@ class ProductsController < ApplicationController
   end
 
   def show
+    redirect_to user_path(current_user) unless current_user.id == params[:user_id]
     @js = ['products_form']
     @user = User.find(params[:user_id])
     @product = Product.find(params[:id])
