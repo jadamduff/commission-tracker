@@ -14,7 +14,11 @@
     <div class="full_width_white_box_container product_box clearfix">
       <div class="color_bar" style="background: <%= sale.product.color %>"></div>
       <div class="contents">
-        <%= sale.product.title %>
+        <% if current_user.id == @user.id %>
+          <%= link_to sale.product.title, user_sale_path(@user, sale) %>
+        <% else %>
+          <%= sale.product.title %>
+        <% end %>
         <div class="right"><%= sale.display_earnings %></div>
         <div class="sub"><%= "Total: #{sale.display_total} | " if !sale.product.is_free? %><%= "#{sale.product.commission_to_percent}% Commission | " if !sale.product.is_free? %><%= "Quantity: #{sale.quantity}" %></div>
       </div>

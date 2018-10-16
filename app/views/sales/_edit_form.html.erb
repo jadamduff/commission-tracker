@@ -1,0 +1,13 @@
+<%= form_for(@sale) do |f| %>
+  <div class="form_box_md">
+    <div class="<%= "field_with_errors" if @sale.errors.include?(:quantity) %>">
+      <%= f.label :product_id, 'Product' %>
+    </div>
+    <%= f.select(:product_id, @manager_products.collect {|p| [ p.title, p.id ] }, { include_blank: true }) %>
+    <div class="<%= "field_with_errors" if @sale.errors.include?(:quantity) %>">
+      <%= f.label :quantity %>
+    </div>
+    <%= f.text_field :quantity, class: 'form_box_md_input_text' %>
+  </div>
+  <%= f.submit 'Update Sale', class: 'form_full_btn' %>
+<% end %>
