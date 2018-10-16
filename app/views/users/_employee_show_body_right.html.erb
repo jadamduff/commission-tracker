@@ -28,7 +28,7 @@
         <% else %>
           <%= product.title %>
         <% end %>
-        <div class="right"><%= pluralize(@user.sales.where('product_id = ?', product.id).count, "Sale") %></div>
+        <div class="right"><%= display_number_sold(product.id) %></div>
         <div class="sub"><%= product.display_price %><%= " | #{product.commission_to_percent}% Commission" if !product.is_free? %></div>
       </div>
     </div>

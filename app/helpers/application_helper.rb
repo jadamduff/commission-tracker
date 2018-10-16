@@ -37,4 +37,16 @@ module ApplicationHelper
     @user.is_manager? && !@user.employees.empty?
   end
 
+  def number_sold(product_id)
+    quantity = 0
+    @user.sales.where('product_id = ?', product_id).each do |sale|
+      quantity += sale.quantity
+    end
+    return quantity
+  end
+
+  def display_number_sold(product_id)
+    "#{number_sold(product_id)} Sold"
+  end
+
 end
