@@ -32,9 +32,11 @@
               </div>
             <% end %>
           <% else %>
-          <div class="button">
-            New Sale
-          </div>
+            <%= link_to new_user_sale_path(current_user) do %>
+              <div class="button">
+                New Sale
+              </div>
+            <% end %>
           <% end %>
         <% end %>
         <div class="logout">

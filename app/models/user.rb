@@ -36,7 +36,7 @@ class User < ApplicationRecord
     end
   end
 
-  def earnings
+  def total_earnings
     @total = 0
     self.sales.each do |sale|
       @total += sale.total.to_i * sale.product.commission
@@ -48,8 +48,8 @@ class User < ApplicationRecord
     end
   end
 
-  def display_earnings
-    "$#{self.earnings}"
+  def display_total_earnings
+    "$#{self.total_earnings}"
   end
 
 end
