@@ -25,7 +25,7 @@ class ProductsController < ApplicationController
   end
 
   def show
-    redirect_to user_path(current_user) unless current_user.id == params[:user_id]
+    redirect_to user_path(current_user) unless current_user.id == params[:user_id].to_i
     @js = ['products_form']
     @user = User.find(params[:user_id])
     @product = Product.find(params[:id])

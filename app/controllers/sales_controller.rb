@@ -7,7 +7,7 @@ class SalesController < ApplicationController
   end
 
   def create
-    redirect_to user_path(current_user) unless !current_user.is_manager
+    redirect_to user_path(current_user) unless !current_user.is_manager?
     @sale = Sale.new
     @sale.quantity = params[:sale][:quantity]
     @sale.product_id = params[:sale][:product_id]
