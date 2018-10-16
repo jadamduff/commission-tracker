@@ -17,4 +17,12 @@ class Sale < ApplicationRecord
     "$#{self.total}"
   end
 
+  def earnings
+    self.total * self.quantity
+  end
+
+  def display_earnings
+    "$#{self.earnings}"
+  end
+
 end
