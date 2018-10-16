@@ -16,6 +16,10 @@ class User < ApplicationRecord
     self.manager == true
   end
 
+  def manager_products
+    Product.where('manager_id = ?', self.id)
+  end
+
   def revenue
     total = 0.0
     self.sales.each do |sale|
