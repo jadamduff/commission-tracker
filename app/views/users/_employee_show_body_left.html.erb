@@ -15,7 +15,7 @@
       <div class="color_bar" style="background: <%= sale.product.color %>"></div>
       <div class="contents">
         <%= sale.product.title %>
-        <div class="right"></div>
+        <div class="right"><%= sale.display_earnings %></div>
         <div class="sub"><%= "Total: #{sale.display_total} | " if !sale.product.is_free? %><%= "#{sale.product.commission_to_percent}% Commission | " if !sale.product.is_free? %><%= "Quantity: #{sale.quantity}" %></div>
       </div>
     </div>

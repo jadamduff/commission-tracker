@@ -18,7 +18,12 @@ class Sale < ApplicationRecord
   end
 
   def earnings
-    self.total * self.quantity
+    total_a = self.total.to_i * self.product.commission
+    if total_a % 1 == 0
+      return total_a.to_i
+    else
+      return '%.2f' % total_a.round(2)
+    end
   end
 
   def display_earnings
