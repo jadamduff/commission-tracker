@@ -16,7 +16,7 @@
       <div class="contents">
         <%= sale.product.title %>
         <div class="right"></div>
-        <div class="sub"></div>
+        <div class="sub"><%= "Total: #{sale.display_total} | " if !sale.product.is_free? %><%= "#{sale.product.commission_to_percent}% Commission | " if !sale.product.is_free? %><%= "Quantity: #{sale.quantity}" %></div>
       </div>
     </div>
   <% end %>

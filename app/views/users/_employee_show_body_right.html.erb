@@ -25,7 +25,7 @@
       <div class="contents">
         <%= product.title %>
         <div class="right"><%= display_number_sold(product.id) %></div>
-        <div class="sub"><%= product.display_price %><%= " | #{product.commission_to_percent}% Commission" if !product.is_free? %></div>
+        <div class="sub"><%= "Price: #{product.display_price}" %><%= " | #{product.commission_to_percent}% Commission" if !product.is_free? %></div>
       </div>
     </div>
   <% end %>
