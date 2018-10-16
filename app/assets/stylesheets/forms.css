@@ -7,7 +7,7 @@
 }
 
 .form_box_md_container {
-  width: 300px;
+  width: 325px;
   margin: 30px auto 75px auto;
   font-family: 'Bangers', sans-serif;
   color: #424242;
@@ -36,7 +36,7 @@
 .form_box_md input[type=text] {
   margin: 0 0 15px 0;
   height: 40px;
-  width: 260px;
+  width: 285px;
   font-family: 'Open Sans', sans-serif;
   color: #424242;
   font-size: 18px;
@@ -51,7 +51,7 @@
 .form_box_md input[type=password] {
   margin: 0 0 15px 0;
   height: 40px;
-  width: 260px;
+  width: 285px;
   font-family: 'Open Sans', sans-serif;
   color: #424242;
   font-size: 18px;
