@@ -34,17 +34,23 @@
 .form_full_delete_btn {
   height: 50px;
   width: 100%;
+  margin-top: 10px;
   text-align: center;
   line-height: 50px;
   vertical-align: middle;
-  background: #f16a67;
-  color: #ed3c39;
+  background: #ffd2d8;
+  color: #e15d5d;
   font-size: 14px;
   font-weight: 300;
   border-radius: 2px;
   border: 0;
   outline: 0;
   text-decoration: none;
+}
+
+.form_full_delete_btn:hover {
+  background: #FFCDD2;
+  cursor: pointer;
 }
 
 .facebook_full_btn {
