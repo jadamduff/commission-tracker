@@ -41,7 +41,8 @@ class ProductsController < ApplicationController
       redirect_to user_path(current_user)
     else
       @js = ['products_form']
-      render 'new'
+      @user = User.find(params[:user_id])
+      render 'show'
     end
   end
 

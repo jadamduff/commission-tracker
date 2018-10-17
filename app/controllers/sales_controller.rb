@@ -22,12 +22,21 @@ class SalesController < ApplicationController
 
   def show
     redirect_to user_path(current_user) unless current_user.sales.include?(Sale.find(params[:id])) && !current_user.is_manager?
+    @user = User.find(params[:user_id])
     @sale = Sale.find(params[:id])
     @manager_products = Product.where('manager_id = ?', current_user.manager_id)
   end
 
   def update
-    raise params
+    @sale = Sale.find(params[:id])
+    @sale.product_id = params[:sale][:product_id]
+    @sale.quantity = params[:sale][:quantity]
+    if @sale.save
+      redirect_to user_path(current_user)
+    else
+      @user = User.find(params[:user_id])
+      render 'show'
+    end
   end
 
 end

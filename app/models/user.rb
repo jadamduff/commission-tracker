@@ -12,6 +12,8 @@ class User < ApplicationRecord
   validate :manager_or_employee
   validate :valid_manager
 
+  include ActionView::Helpers
+
   def is_manager?
     self.manager == true
   end
@@ -53,7 +55,11 @@ class User < ApplicationRecord
   end
 
   def display_total_earnings
-    "$#{self.total_earnings}"
+    if self.total_earnings % 1 == 0
+      "#{number_to_currency(self.total_earnings, precision: 0)}"
+    else
+      "#{number_to_currency(self.total_earnings, precision: 2)}"
+    end
   end
 
 end
