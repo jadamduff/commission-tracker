@@ -3,13 +3,13 @@ Rails.application.routes.draw do
 
   resources :users, only: [:create, :show] do
     resources :employees, only: [:show]
-    resources :products, only: [:new, :show]
-    resources :sales, only: [:new, :show]
+    resources :products, only: [:new, :show, :destroy]
+    resources :sales, only: [:new, :show, :destroy]
   end
 
   resources :products, only: [:create, :update]
   resources :sales, only: [:create, :update]
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :sessions, only: [:new, :create]
 
   get '/login', :to => 'sessions#new'
   get '/logout', :to => 'sessions#destroy'
