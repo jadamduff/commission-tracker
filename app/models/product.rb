@@ -4,6 +4,8 @@ class Product < ApplicationRecord
 
   validates_presence_of :title, :price, :commission, :color
 
+  include ActionView::Helpers
+
   def commission_to_percent
     "#{(self.commission * 100).to_i}"
   end
@@ -13,7 +15,11 @@ class Product < ApplicationRecord
     self.sales.each do |sale|
       total += sale.product.price * sale.quantity
     end
-    return "$#{total.round}"
+    if total % 1 == 0
+      return "#{number_to_currency(total, precision: 0)}"
+    else
+      return "#{number_to_currency(total, precision: 2)}"
+    end
   end
 
   def formatted_price
@@ -25,7 +31,15 @@ class Product < ApplicationRecord
   end
 
   def display_price
-    self.is_free? ? "Free" : "$#{self.formatted_price}"
+    if self.is_free?
+      return "Free"
+    else
+      if self.formatted_price % 1 == 0
+        "#{number_to_currency(self.formatted_price, precision: 0)}"
+      else
+        "#{number_to_currency(self.formatted_price, precision: 2)}"
+      end
+    end
   end
 
   def is_free?

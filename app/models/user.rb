@@ -27,7 +27,11 @@ class User < ApplicationRecord
     self.sales.each do |sale|
       total += sale.product.price * sale.quantity
     end
-    return "$#{total.round}"
+    if total % 1 == 0
+      return "#{number_to_currency(total, precision: 0)}"
+    else
+      return "#{number_to_currency(total, precision: 2)}"
+    end
   end
 
   def valid_manager
