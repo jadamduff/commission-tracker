@@ -20,7 +20,7 @@
           <%= product.title %>
         <% end %>
         <div class="right"><%= product.display_price %></div>
-        <div class="sub"><%= "#{product.commission_to_percent}% Commission | " if !product.is_free? %><%= product.sales.count %> Sales<%= " | #{product.revenue} Total Revenue" if !product.is_free? %></div>
+        <div class="sub"><%= "#{product.commission_to_percent}% Commission | " if !product.is_free? %><%= pluralize(product.sales.count, 'Sale') %><%= " | #{product.revenue} Total Revenue" if !product.is_free? %></div>
       </div>
     </div>
   <% end %>
