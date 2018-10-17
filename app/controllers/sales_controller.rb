@@ -1,5 +1,7 @@
 class SalesController < ApplicationController
 
+  before_action :require_login, only: [:show, :new, :create, :update]
+
   def new
     redirect_to user_path(current_user) unless !current_user.is_manager?
     @sale = Sale.new

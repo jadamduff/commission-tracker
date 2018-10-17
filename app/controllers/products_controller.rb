@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
 
+  before_action :require_login, only: [:show, :new, :create, :update]
+
   include ProductsHelper
 
   def new

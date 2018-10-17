@@ -1,5 +1,7 @@
 class ManagersController < ApplicationController
 
+  before_action :require_login, only: [:show]
+
   include ManagersHelper
 
   def show
