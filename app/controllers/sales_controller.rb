@@ -41,4 +41,14 @@ class SalesController < ApplicationController
     end
   end
 
+  def destroy
+    @sale = Sale.find(params[:id])
+    if current_user.id == params[:user_id].to_i
+      @sale.destroy
+      redirect_to user_path(current_user)
+    else
+      redirect_to user_path(current_user)
+    end
+  end
+
 end
