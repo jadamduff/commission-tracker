@@ -48,4 +48,15 @@ class ProductsController < ApplicationController
     end
   end
 
+  def destroy
+    @product = Product.find(params[:id])
+    if current_user.id == params[:user_id].to_i
+      Sale.where('product_id = ?', @product.id).destroy_all
+      @product.destroy
+      redirect_to user_path(current_user)
+    else
+      redirect_to user_path(current_user)
+    end
+  end
+
 end

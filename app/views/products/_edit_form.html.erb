@@ -26,4 +26,9 @@
     <%= f.text_field :color, class: 'form_box_md_input_text' %>
   </div>
   <%= f.submit 'Update', class: 'form_full_btn' %>
+  <%= link_to user_product_path(current_user, @product), method: :delete do %>
+    <div class="form_full_delete_btn">
+      Delete
+    </div>
+  <% end %>
 <% end %>
