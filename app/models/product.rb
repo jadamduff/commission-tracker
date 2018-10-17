@@ -3,6 +3,7 @@ class Product < ApplicationRecord
   has_many :users, through: :sales
 
   validates_presence_of :title, :price, :commission, :color
+  validates :price, numericality: true
 
   include ActionView::Helpers
 
