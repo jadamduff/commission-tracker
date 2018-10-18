@@ -22,7 +22,7 @@ class EmployeesController < ApplicationController
       @products = @user.products
     else
       @manager = User.find(@user.manager_id)
-      @products = @user.products
+      @products = @user.products.uniq
       @sales = @user.sales
     end
   end
