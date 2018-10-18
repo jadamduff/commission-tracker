@@ -60,6 +60,7 @@ class ProductsController < ApplicationController
   end
 
   def hot_products
+    redirect_to user_path(current_user) unless current_user.is_manager?
     @user = current_user
     @products = Product.list_hot_products(current_user.id)
   end
