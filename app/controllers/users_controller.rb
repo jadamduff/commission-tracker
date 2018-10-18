@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   include UsersHelper
 
-  before_action :require_login, only: [:show]
+  before_action :require_login, only: [:show, :hot_products]
 
   def create
     @user = User.new(name: params[:user][:name], email: params[:user][:email], password: params[:user][:password], manager: params[:user][:manager])
@@ -16,6 +16,10 @@ class UsersController < ApplicationController
     else
       render 'welcome/welcome'
     end
+  end
+
+  def hot_products
+
   end
 
   def show
