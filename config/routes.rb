@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get '/login', :to => 'sessions#new'
   get '/logout', :to => 'sessions#destroy'
   get '/users', :to => 'welcome#welcome'
+  get '/users/hot_products', :to => 'users#hot_products'
   get '/users/:user_id/manager', :to => 'managers#show', :as => 'manager'
   get '/auth/facebook/callback' => 'sessions#create'
 
