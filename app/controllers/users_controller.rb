@@ -18,10 +18,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def hot_products
-
-  end
-
   def show
     @user = User.find(params[:id])
     set_show_variables

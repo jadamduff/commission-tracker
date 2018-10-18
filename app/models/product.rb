@@ -7,6 +7,10 @@ class Product < ApplicationRecord
 
   include ActionView::Helpers
 
+  def self.list_hot_products(user_id)
+    self.joins(:sales).group('products.id').where('products.manager_id = ?', user_id).order('count(sales.id) DESC').limit(3).select('products.*')
+  end
+
   def commission_to_percent
     "#{(self.commission * 100).to_i}"
   end

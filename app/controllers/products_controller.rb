@@ -59,4 +59,8 @@ class ProductsController < ApplicationController
     end
   end
 
+  def hot_products
+    @products = Product.list_hot_products(current_user.id)
+  end
+
 end
