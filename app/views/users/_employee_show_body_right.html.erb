@@ -20,11 +20,11 @@
   </div>
 <% else %>
   <% @products.each do |product| %>
-    <div class="full_width_white_box_container product_box employee_product clearfix" data-product-id="<%= product.id %>">
+    <div class="full_width_white_box_container product_box employee_product clearfix" id="employee-product-<%= product.id %>" data-product-id="<%= product.id %>">
       <div class="color_bar" style="background: <%= product.color %>"></div>
       <div class="contents">
-        <%= product.title %>
-        <div class="right"><%= display_number_sold(product.id) %></div>
+        <span class="product-title"><%= product.title %></span>
+        <div class="right display-number-sold"><%= display_number_sold(product.id) %></div>
         <div class="sub"><%= "Price: #{product.display_price}" %><%= " | #{product.commission_to_percent}% Commission" if !product.is_free? %></div>
       </div>
     </div>

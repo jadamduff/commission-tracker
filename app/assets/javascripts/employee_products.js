@@ -4,10 +4,10 @@ function EmployeeProduct(attributes) {
   this.id = attributes.id;
   this.color = attributes.color;
   this.title = attributes.title;
-  this.numberSold = attributes.numberSold;
+  this.numberSold = attributes['number-sold'];
   this.price = attributes.price;
   this.commission = attributes.commission;
-  this.isFree = attributes.isFree;
+  this.isFree = attributes['is-free'];
 }
 
 EmployeeProduct.getSoldProductsIds = function() {
@@ -16,7 +16,6 @@ EmployeeProduct.getSoldProductsIds = function() {
       productsSoldIds.push(parseInt(product.dataset.productId));
     }
   }
-  console.log(productsSoldIds);
 }
 
 EmployeeProduct.checkEmpty = function() {
@@ -25,6 +24,22 @@ EmployeeProduct.checkEmpty = function() {
   }
 }
 
-EmployeeProduct.updateProductsSold = function() {
-  EmployeeProduct.checkEmpty();
+EmployeeProduct.prototype.updateSoldProducts = function() {
+  if ($.inArray(this.id, productsSoldIds) >= 0) {
+    let $productDiv = $('#employee-product-' + this.id);
+    $productDiv.find('.display-number-sold').text(this.numberSold + " Sold");
+  } else {
+    let html = EmployeeProduct.template(this);
+    $('.body-right').append(html);
+  }
 }
+
+EmployeeProduct.ready = function() {
+  EmployeeProduct.templateSource = $('#employee-product-template').html();
+  EmployeeProduct.template = Handlebars.compile(EmployeeProduct.templateSource);
+  EmployeeProduct.getSoldProductsIds();
+}
+
+$(document).on('turbolinks:load', function() {
+  EmployeeProduct.ready();
+});

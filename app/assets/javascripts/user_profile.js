@@ -34,8 +34,6 @@ $(document).on('turbolinks:load', function() {
     }
   });
 
-  getSoldProductsIds();
-
   console.log('worked');
 
 })

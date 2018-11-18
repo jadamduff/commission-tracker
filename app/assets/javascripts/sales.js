@@ -27,9 +27,12 @@ Sale.prototype.renderSaleDiv = function() {
 Sale.success = function(data) {
   console.log(data);
   let sale = new Sale(data.data.attributes.data.sale);
+  let product = new EmployeeProduct(data.data.attributes.data.product);
   console.log(sale);
+  console.log(product);
   let saleDiv = sale.renderSaleDiv();
   $('#sales_header').after(saleDiv);
+  product.updateSoldProducts();
 }
 
 Sale.ready = function() {
@@ -38,6 +41,6 @@ Sale.ready = function() {
   Sale.formSubmitListener();
 }
 
-$(function() {
+$(document).on('turbolinks:load', function() {
   Sale.ready();
 })
