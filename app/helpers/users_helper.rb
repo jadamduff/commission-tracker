@@ -10,7 +10,8 @@ module UsersHelper
     else
       @manager = User.find(@user.manager_id)
       @products = @user.products.uniq
-      @sales = @user.sales
+      @sales = @user.sales.reverse_order
+      @manager_products = Product.where('manager_id = ?', current_user.manager_id)
     end
   end
 

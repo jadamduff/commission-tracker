@@ -47,6 +47,12 @@ gem 'dotenv-rails'
 
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 
+gem 'active_model_serializers', '~> 0.10.2'
+
+gem 'tether-rails'
+
+gem 'handlebars_assets'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

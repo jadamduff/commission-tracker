@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   get '/hot_products', :to => 'products#hot_products'
   get '/users/:user_id/manager', :to => 'managers#show', :as => 'manager'
   get '/auth/facebook/callback' => 'sessions#create'
+  get '/sales/by_quantity' => 'sales#by_quantity'
+  get '/sale_data/:id' => 'sales#data'
+  get '/users/:id/sales' => 'users#sales'
 
   root 'welcome#welcome'
 end

@@ -1,6 +1,7 @@
 class EmployeesController < ApplicationController
 
   before_action :require_login, only: [:show]
+  before_action :set_form_variables, only: [:show]
 
   def show
     @user = User.find(params[:id])

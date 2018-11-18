@@ -51,4 +51,8 @@ class Product < ApplicationRecord
     self.price == 0
   end
 
+  def sale_count
+    pluralize(self.sales.count, 'Sale')
+  end
+
 end

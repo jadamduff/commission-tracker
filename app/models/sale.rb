@@ -40,4 +40,8 @@ class Sale < ApplicationRecord
     end
   end
 
+  def self.display_by_quantity
+    order(quantity: :desc)
+  end
+
 end

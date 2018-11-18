@@ -49,4 +49,13 @@ module ApplicationHelper
     "#{number_sold(product_id)} Sold"
   end
 
+  def set_form_variables
+    if current_user.is_manager?
+
+    else
+      @sale = Sale.new
+      @manager_products = Product.where('manager_id = ?', current_user.manager_id)
+    end
+  end
+
 end

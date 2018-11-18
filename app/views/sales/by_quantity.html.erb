@@ -1,0 +1,7 @@
+<ul>
+  <% @sales.each do |sale| %>
+    <li>
+      <%= sale.product.title %>, <%= sale.quantity %>
+    </li>
+  <% end %>
+</ul>

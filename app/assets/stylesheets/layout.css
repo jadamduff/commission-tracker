@@ -46,6 +46,15 @@
   float: right;
 }
 
+.header .button:hover {
+  cursor: pointer;
+}
+
+.activated {
+  border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
 .header .logout {
   float: right;
   line-height: 65px;

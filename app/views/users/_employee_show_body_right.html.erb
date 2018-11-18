@@ -14,13 +14,13 @@
   Products Sold
 </div>
 <% if @products.empty? %>
-  <div class="full_width_white_box_container product_box clearfix" style="text-align: center">
+  <div class="full_width_white_box_container product_box clearfix" id="productsSoldEmpty" style="text-align: center">
     <div class="color_bar" style="background: #39474a"></div>
     <div class="empty">No products sold, yet.</div>
   </div>
 <% else %>
   <% @products.each do |product| %>
-    <div class="full_width_white_box_container product_box clearfix">
+    <div class="full_width_white_box_container product_box employee_product clearfix" data-product-id="<%= product.id %>">
       <div class="color_bar" style="background: <%= product.color %>"></div>
       <div class="contents">
         <%= product.title %>

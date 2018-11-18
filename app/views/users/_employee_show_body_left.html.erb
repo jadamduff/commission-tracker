@@ -1,7 +1,7 @@
-<div class="header_md_light_gray_skinny">
+<div class="header_md_light_gray_skinny" id="user_name">
   <%= 'Hi, ' if is_current_users_profile? %><%= @user.name %>
 </div>
-<div class="header_xs_dark_blue_skinny" style="margin: 25px 0 10px 0">
+<div class="header_xs_dark_blue_skinny" style="margin: 25px 0 10px 0" id="sales_header">
   Sales
 </div>
 <% if @sales.empty? %>

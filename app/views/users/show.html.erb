@@ -14,3 +14,38 @@
       <% end %>
   </div>
 </div>
+
+<% if @user.is_manager? %>
+
+<% else %>
+  <script id="sale-template" type="text/x-handlebars-template">
+    <div class="full_width_white_box_container product_box clearfix">
+      <div class="color_bar" style="background: {{productColor}}"></div>
+      <div class="contents">
+        <% if current_user.id == @user.id %>
+          <a href="/users/<%= @user.id %>/sales/{{id}}">{{productTitle}}</a>
+        <% else %>
+          {{productTitle}}
+        <% end %>
+        <div class="right">{{earnings}}</div>
+        <div class="sub">
+          {{#if isFree}}
+            FREE | Quantity: {{quantity}}
+          {{else}}
+            Total: {{total}} | {{commission}} | Quantity: {{quantity}}
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </script>
+  <script id="employee-product-template" type="text/x-handlebars-template">
+    <div class="full_width_white_box_container product_box clearfix">
+      <div class="color_bar" style="background: {{color}}"></div>
+      <div class="contents">
+        {{title}}
+        <div class="right">{{numberSold}}</div>
+        <div class="sub">Price: {{price}} | {{commission}}</div>
+      </div>
+    </div>
+  </script>
+<% end %>

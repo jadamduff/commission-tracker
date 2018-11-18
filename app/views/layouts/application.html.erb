@@ -7,11 +7,6 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <% if @js %>
-      <% @js.each do |script| %>
-        <%= javascript_include_tag script, 'data-turbolinks-track': 'reload' %>
-      <% end %>
-    <% end %>
   </head>
 
   <body>
@@ -25,18 +20,31 @@
           <% end %>
         </div>
         <% if logged_in? %>
-          <% if current_user_is_manager? %>
+          <% if current_user_is_manager? && is_current_users_profile? %>
             <%= link_to new_user_product_path(current_user) do %>
               <div class="button">
                 New Product
               </div>
             <% end %>
-          <% else %>
-            <%= link_to new_user_sale_path(current_user) do %>
-              <div class="button">
-                New Sale
+          <% elsif is_current_users_profile? %>
+            <div class="button">
+              New Sale
+            </div>
+            <div class="form_box_md_container_popup">
+              <div class="form_box_popup form_box_md">
+                <%= form_for(@sale) do |f| %>
+                  <div>
+                    <%= f.label :product_id, 'Product' %>
+                  </div>
+                  <%= f.select(:product_id, @manager_products.collect {|p| [ p.title, p.id ] }, { include_blank: true }) %>
+                  <div>
+                    <%= f.label :quantity %>
+                  </div>
+                  <%= f.text_field :quantity, class: 'form_box_md_input_text' %>
+                  <%= f.submit 'Add Sale', class: 'form_full_btn' %>
+                <% end %>
               </div>
-            <% end %>
+            </div>
           <% end %>
         <% end %>
         <div class="logout">
