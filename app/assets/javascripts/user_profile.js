@@ -13,6 +13,7 @@ function closeForm(button, text) {
   $('form')[0].reset();
   button.removeClass('activated');
   button.text(text);
+  $('#new_sale div').removeClass('field_with_errors');
   $('.form_box_md_container_popup').show().animate({
     opacity: 1
   }, 75).hide();
@@ -42,7 +43,4 @@ $(document).on('turbolinks:load', function() {
       closeForm($(this), buttonText);
     }
   });
-
-  console.log('worked');
-
 })

@@ -9,32 +9,17 @@ function Sale(attributes) {
   this.isFree = attributes['is-free'];
 }
 
-Sale.formSubmitListener = function() {
-  $('#new_sale').on('submit', function(e) {
-    e.preventDefault();
-    console.log('clicked');
-    let $form = $(this);
-    let values = $form.serialize();
-    let posting = $.post('/sales', values);
-
-    posting.success(Sale.handleResponse);
-  })
-}
-
 Sale.prototype.renderSaleDiv = function() {
   return Sale.template(this);
 }
 
 Sale.success = function(data) {
-
   let sale = new Sale(data.data.attributes.data.sale);
   let product = new EmployeeProduct(data.data.attributes.data.product);
-  console.log(sale);
-  console.log(product);
   let saleDiv = sale.renderSaleDiv();
+  product.updateSoldProducts();
   $('#sales_header').after(saleDiv);
   $('.earnings').text(data.data.attributes.data['total-earnings']);
-  product.updateSoldProducts();
   closeForm($('.button'), 'New Sale');
 }
 
@@ -63,6 +48,18 @@ Sale.handleResponse = function(data) {
     Sale.failure(respData);
     console.log('failure');
   }
+}
+
+Sale.formSubmitListener = function() {
+  $('#new_sale').on('submit', function(e) {
+    e.preventDefault();
+    console.log('clicked');
+    let $form = $(this);
+    let values = $form.serialize();
+    let posting = $.post('/sales', values);
+
+    posting.success(Sale.handleResponse);
+  })
 }
 
 Sale.ready = function() {
