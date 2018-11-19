@@ -17,7 +17,7 @@ Sale.formSubmitListener = function() {
     let values = $form.serialize();
     let posting = $.post('/sales', values);
 
-    posting.success(Sale.success);
+    posting.success(Sale.handleResponse);
   })
 }
 
@@ -26,34 +26,43 @@ Sale.prototype.renderSaleDiv = function() {
 }
 
 Sale.success = function(data) {
-  if ($.isEmptyObject(data.errors)) {
-    let sale = new Sale(data.data.attributes.data.sale);
-    let product = new EmployeeProduct(data.data.attributes.data.product);
-    console.log(sale);
-    console.log(product);
-    let saleDiv = sale.renderSaleDiv();
-    $('#sales_header').after(saleDiv);
-    $('.earnings').text(data.data.attributes.data['total-earnings']);
-    product.updateSoldProducts();
-    closeForm($('.button'), 'New Sale');
+
+  let sale = new Sale(data.data.attributes.data.sale);
+  let product = new EmployeeProduct(data.data.attributes.data.product);
+  console.log(sale);
+  console.log(product);
+  let saleDiv = sale.renderSaleDiv();
+  $('#sales_header').after(saleDiv);
+  $('.earnings').text(data.data.attributes.data['total-earnings']);
+  product.updateSoldProducts();
+  closeForm($('.button'), 'New Sale');
+}
+
+Sale.failure = function(data) {
+  console.log(Object.keys(data.errors));
+  let errors = Object.keys(data.errors);
+  if ($.inArray('product_id', errors) >= 0) {
+    $('#sale-product-label').addClass('field_with_errors');
+    console.log('added');
   } else {
-    console.log(Object.keys(data.errors));
-    let errors = Object.keys(data.errors);
-    if ($.inArray('product_id', errors) >= 0) {
-      $('#sale-product-label').addClass('field_with_errors');
-    } else {
-      $('#sale-product-label').removeClass('field_with_errors');
-    }
-    if ($.inArray('quantity', errors) >= 0) {
-      $('#sale-quantity-label').addClass('field_with_errors');
-    } else {
-      $('#sale-quantity-label').removeClass('field_with_errors');
-    }
+    $('#sale-product-label').removeClass('field_with_errors');
+  }
+  if ($.inArray('quantity', errors) >= 0) {
+    $('#sale-quantity-label').addClass('field_with_errors');
+  } else {
+    $('#sale-quantity-label').removeClass('field_with_errors');
   }
 }
 
-Sale.failure = function(errors) {
-  console.log(errors);
+Sale.handleResponse = function(data) {
+  let respData = data;
+  if ($.isEmptyObject(data.errors)) {
+    Sale.success(respData);
+    console.log('success');
+  } else {
+    Sale.failure(respData);
+    console.log('failure');
+  }
 }
 
 Sale.ready = function() {
