@@ -33,15 +33,15 @@
             <div class="form_box_md_container_popup">
               <div class="form_box_popup form_box_md">
                 <%= form_for(@sale) do |f| %>
-                  <div>
+                  <div id="sale-product-label">
                     <%= f.label :product_id, 'Product' %>
                   </div>
                   <%= f.select(:product_id, @manager_products.collect {|p| [ p.title, p.id ] }, { include_blank: true }) %>
-                  <div>
+                  <div id="sale-quantity-label">
                     <%= f.label :quantity %>
                   </div>
                   <%= f.text_field :quantity, class: 'form_box_md_input_text' %>
-                  <%= f.submit 'Add Sale', class: 'form_full_btn' %>
+                  <%= f.submit 'Add Sale', class: 'form_full_btn', data: { disable_with: false } %>
                 <% end %>
               </div>
             </div>

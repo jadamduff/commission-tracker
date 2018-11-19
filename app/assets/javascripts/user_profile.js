@@ -1,7 +1,27 @@
+let formVisible = false;
+
+function openForm(button) {
+  button.addClass('activated');
+  button.text('Cancel');
+  $('.form_box_md_container_popup').show().animate({
+    opacity: 1
+  }, 75);
+  formVisible = true;
+}
+
+function closeForm(button, text) {
+  $('form')[0].reset();
+  button.removeClass('activated');
+  button.text(text);
+  $('.form_box_md_container_popup').show().animate({
+    opacity: 1
+  }, 75).hide();
+  formVisible = false;
+}
+
 $(document).on('turbolinks:load', function() {
 
   let formTether;
-  let formVisible = false;
   let buttonText = $('.button').text();
 
   if ($('.button').length > 0) {
@@ -17,20 +37,9 @@ $(document).on('turbolinks:load', function() {
 
   $(document).on('click', '.button', function(e) {
     if (formVisible === false) {
-      $(this).addClass('activated');
-      $(this).text('Cancel');
-      $('.form_box_md_container_popup').show().animate({
-        opacity: 1
-      }, 75);
-      formVisible = true;
+      openForm($(this));
     } else {
-      $('form')[0].reset();
-      $(this).removeClass('activated');
-      $(this).text(buttonText);
-      $('.form_box_md_container_popup').show().animate({
-        opacity: 1
-      }, 75).hide();
-      formVisible = false;
+      closeForm($(this), buttonText);
     }
   });
 

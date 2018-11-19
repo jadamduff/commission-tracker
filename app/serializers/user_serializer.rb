@@ -40,6 +40,7 @@ class UserSerializer < ActiveModel::Serializer
 
   def employee_data
     {
+      totalEarnings: self.object.display_total_earnings,
       manager:
         {
           name: User.find(self.object.manager_id).name,

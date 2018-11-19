@@ -10,7 +10,9 @@ class SaleSerializer < ActiveModel::Serializer
   end
 
   def data
-    { sale:
+    {
+      totalEarnings: self.object.user.display_total_earnings,
+      sale:
         {
           id: self.object.id,
           earnings: self.object.display_earnings,
@@ -31,7 +33,7 @@ class SaleSerializer < ActiveModel::Serializer
           numberSold: number_sold(self.object.product.id),
           color: self.object.product.color
         }
-    }
+      }
   end
 
 end

@@ -10,8 +10,9 @@ function Sale(attributes) {
 }
 
 Sale.formSubmitListener = function() {
-  $(document).on('submit', '#new_sale', function(e) {
+  $('#new_sale').on('submit', function(e) {
     e.preventDefault();
+    console.log('clicked');
     let $form = $(this);
     let values = $form.serialize();
     let posting = $.post('/sales', values);
@@ -25,14 +26,34 @@ Sale.prototype.renderSaleDiv = function() {
 }
 
 Sale.success = function(data) {
-  console.log(data);
-  let sale = new Sale(data.data.attributes.data.sale);
-  let product = new EmployeeProduct(data.data.attributes.data.product);
-  console.log(sale);
-  console.log(product);
-  let saleDiv = sale.renderSaleDiv();
-  $('#sales_header').after(saleDiv);
-  product.updateSoldProducts();
+  if ($.isEmptyObject(data.errors)) {
+    let sale = new Sale(data.data.attributes.data.sale);
+    let product = new EmployeeProduct(data.data.attributes.data.product);
+    console.log(sale);
+    console.log(product);
+    let saleDiv = sale.renderSaleDiv();
+    $('#sales_header').after(saleDiv);
+    $('.earnings').text(data.data.attributes.data['total-earnings']);
+    product.updateSoldProducts();
+    closeForm($('.button'), 'New Sale');
+  } else {
+    console.log(Object.keys(data.errors));
+    let errors = Object.keys(data.errors);
+    if ($.inArray('product_id', errors) >= 0) {
+      $('#sale-product-label').addClass('field_with_errors');
+    } else {
+      $('#sale-product-label').removeClass('field_with_errors');
+    }
+    if ($.inArray('quantity', errors) >= 0) {
+      $('#sale-quantity-label').addClass('field_with_errors');
+    } else {
+      $('#sale-quantity-label').removeClass('field_with_errors');
+    }
+  }
+}
+
+Sale.failure = function(errors) {
+  console.log(errors);
 }
 
 Sale.ready = function() {
