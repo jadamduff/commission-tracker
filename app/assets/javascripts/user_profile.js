@@ -14,6 +14,7 @@ function closeForm(button, text) {
   button.removeClass('activated');
   button.text(text);
   $('#new_sale div').removeClass('field_with_errors');
+  $('#new_product div').removeClass('field_with_errors');
   $('.form_box_md_container_popup').show().animate({
     opacity: 1
   }, 75).hide();

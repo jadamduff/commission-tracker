@@ -24,8 +24,9 @@ class UsersController < ApplicationController
     set_show_variables
     valid_page_view
     respond_to do |format|
-      format.html { render :show }
       format.json { render json: @user, status: 200 }
+      format.html { render :show }
+
     end
   end
 

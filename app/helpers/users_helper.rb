@@ -6,7 +6,8 @@ module UsersHelper
   def set_show_variables
     if @user.is_manager?
       @employees = @user.employees
-      @products = Product.where('manager_id = ?', @user.id)
+      @products = Product.where('manager_id = ?', @user.id).reverse_order
+      @product = Product.new
     else
       @manager = User.find(@user.manager_id)
       @products = @user.products.uniq

@@ -41,5 +41,7 @@ EmployeeProduct.ready = function() {
 }
 
 $(document).on('turbolinks:load', function() {
-  EmployeeProduct.ready();
+  if ($('#employee-product-template').length > 0) {
+    EmployeeProduct.ready();
+  }
 });

@@ -19,10 +19,9 @@ class ProductsController < ApplicationController
     @product.color = params[:product][:color]
     @product.manager_id = current_user.id
     if @product.save
-      redirect_to user_path(current_user)
+      render json: @product, status: 201
     else
-      @js = ['products_form']
-      render 'new'
+      render json: { errors: @product.errors }
     end
   end
 

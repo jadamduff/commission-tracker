@@ -24,11 +24,9 @@ Sale.success = function(data) {
 }
 
 Sale.failure = function(data) {
-  console.log(Object.keys(data.errors));
   let errors = Object.keys(data.errors);
   if ($.inArray('product_id', errors) >= 0) {
     $('#sale-product-label').addClass('field_with_errors');
-    console.log('added');
   } else {
     $('#sale-product-label').removeClass('field_with_errors');
   }
@@ -43,21 +41,17 @@ Sale.handleResponse = function(data) {
   let respData = data;
   if ($.isEmptyObject(data.errors)) {
     Sale.success(respData);
-    console.log('success');
   } else {
     Sale.failure(respData);
-    console.log('failure');
   }
 }
 
 Sale.formSubmitListener = function() {
   $('#new_sale').on('submit', function(e) {
     e.preventDefault();
-    console.log('clicked');
     let $form = $(this);
     let values = $form.serialize();
     let posting = $.post('/sales', values);
-
     posting.success(Sale.handleResponse);
   })
 }
@@ -69,5 +63,7 @@ Sale.ready = function() {
 }
 
 $(document).on('turbolinks:load', function() {
-  Sale.ready();
+  if ($('#sale-template').length > 0) {
+    Sale.ready();
+  }
 })

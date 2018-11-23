@@ -16,7 +16,24 @@
 </div>
 
 <% if @user.is_manager? %>
-
+  <script id="manager-product-template" type="text/x-handlebars-template">
+    <div class="full_width_white_box_container product_box clearfix">
+      <div class="color_bar" style="background: {{color}}"></div>
+      <div class="contents">
+        <% if current_user.id == @user.id %>
+          <a href="/users/<%= @user.id %>/products/{{id}}">{{title}}</a>
+        <% else %>
+          {{title}}
+        <% end %>
+        <div class="right">{{price}}</div>
+        {{# if isFree}}
+          <div class="sub">{{saleCount}}</div>
+        {{else}}
+          <div class="sub">{{commission}} | {{saleCount}} Sales | {{revenue}} Total Revenue</div>
+        {{/if}}
+      </div>
+    </div>
+  </script>
 <% else %>
   <script id="sale-template" type="text/x-handlebars-template">
     <div class="full_width_white_box_container product_box clearfix">

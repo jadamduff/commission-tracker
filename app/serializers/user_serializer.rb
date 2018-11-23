@@ -1,8 +1,14 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name, :is_manager, :manager_data, :employee_data
-
+  attributes :id, :name, :is_manager
+  attribute :manager_data, if: :is_manager
+  attribute :employee_data, if: :is_employee
+  
   def is_manager
     self.object.is_manager?
+  end
+
+  def is_employee
+    !self.object.is_manager?
   end
 
   def number_sold(product_id)
@@ -18,14 +24,13 @@ class UserSerializer < ActiveModel::Serializer
         products: Product.where('manager_id = ?', self.object.id).map do |product|
           {
             id: product.id,
+            color: product.color,
             title: product.title,
             price: product.display_price,
-            commission: product.commission_to_percent,
-            manager_id: product.manager_id,
-            color: product.color,
-            is_free?: product.is_free?,
+            commission: product.commission_to_percent + '% Commission',
             sale_count: product.sale_count,
-            revenue: product.revenue
+            revenue: product.revenue,
+            is_free: product.is_free?
           }
         end,
 
