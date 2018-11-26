@@ -1,27 +1,6 @@
-<div class="header_md_light_gray_skinny" id="user_name">
+<div class="header_md_light_gray_skinny employee-body" data-id="<%= @user.id %>" id="user_name">
   <%= 'Hi, ' if is_current_users_profile? %><%= @user.name %>
 </div>
 <div class="header_xs_dark_blue_skinny" style="margin: 25px 0 10px 0" id="sales_header">
   Sales
 </div>
-<% if @sales.empty? %>
-  <div class="full_width_white_box_container product_box clearfix" style="text-align: center">
-    <div class="color_bar" style="background: #39474a"></div>
-    <div class="empty">No sales, yet.</div>
-  </div>
-<% else %>
-  <% @sales.each do |sale| %>
-    <div class="full_width_white_box_container product_box clearfix">
-      <div class="color_bar" style="background: <%= sale.product.color %>"></div>
-      <div class="contents">
-        <% if current_user.id == @user.id %>
-          <%= link_to sale.product.title, user_sale_path(@user, sale) %>
-        <% else %>
-          <%= sale.product.title %>
-        <% end %>
-        <div class="right"><%= sale.display_earnings %></div>
-        <div class="sub"><%= "Total: #{sale.display_total} | " if !sale.product.is_free? %><%= "#{sale.product.commission_to_percent}% Commission | " if !sale.product.is_free? %><%= "Quantity: #{sale.quantity}" %></div>
-      </div>
-    </div>
-  <% end %>
-<% end %>

@@ -1,26 +1,30 @@
-<div class="container">
+<div class="container" id="hot_products_container" data-id="<%= @user.id %>">
   <div class="header_xs_dark_blue_skinny" style="margin: 25px 0 10px 0">
     Hot Products
   </div>
-  <% if @products.empty? %>
-    <div class="full_width_white_box_container product_box clearfix" style="text-align: center">
-      <div class="color_bar" style="background: #39474a"></div>
-      <div class="empty">No hot products.</div>
-    </div>
-  <% else %>
-    <% @products.each do |product| %>
-      <div class="full_width_white_box_container product_box clearfix">
-        <div class="color_bar" style="background: <%= product.color %>"></div>
-        <div class="contents">
-          <% if current_user.id == @user.id %>
-            <%= link_to product.title, user_product_path(@user, product)%>
-          <% else %>
-            <%= product.title %>
-          <% end %>
-          <div class="right"><%= product.display_price %></div>
-          <div class="sub"><%= "#{product.commission_to_percent}% Commission | " if !product.is_free? %><%= pluralize(product.sales.count, 'Sale') %><%= " | #{product.revenue} Total Revenue" if !product.is_free? %></div>
-        </div>
-      </div>
-    <% end %>
-  <% end %>
 </div>
+
+<script id="manager-product-template" type="text/x-handlebars-template">
+  <div class="full_width_white_box_container product_box clearfix">
+    <div class="color_bar" style="background: {{color}}"></div>
+    <div class="contents">
+      <% if current_user.id == @user.id %>
+        <a href="/users/<%= @user.id %>/products/{{id}}">{{title}}</a>
+      <% else %>
+        {{title}}
+      <% end %>
+      <div class="right">{{price}}</div>
+      {{# if isFree}}
+        <div class="sub">{{saleCount}}</div>
+      {{else}}
+        <div class="sub">{{commission}} | {{saleCount}} Sales | {{revenue}} Total Revenue</div>
+      {{/if}}
+    </div>
+  </div>
+</script>
+<script id="manager-hot-product-empty-template" type="text/x-handlebars-template">
+  <div class="full_width_white_box_container product_box clearfix" style="text-align: center">
+    <div class="color_bar" style="background: #39474a"></div>
+    <div class="empty">No hot products.</div>
+  </div>
+</script>

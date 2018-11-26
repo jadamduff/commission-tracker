@@ -59,9 +59,17 @@ class ProductsController < ApplicationController
   end
 
   def hot_products
-    redirect_to user_path(current_user) unless current_user.is_manager?
-    @user = current_user
-    @products = Product.list_hot_products(current_user.id)
+    if current_user.is_manager?
+      @user = current_user
+      @products = Product.list_hot_products(current_user.id)
+
+      respond_to do |format|
+        format.json { render json: @products, status: 200 }
+        format.html { render :hot_products }
+      end
+    else
+      redirect_to user_path(current_user)
+    end
   end
 
 end

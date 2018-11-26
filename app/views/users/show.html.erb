@@ -34,6 +34,18 @@
       </div>
     </div>
   </script>
+  <script id="manager-empty-product-template" type="text/x-handlebars-template">
+    <div class="full_width_white_box_container product_box clearfix" id="empty-manager-product-div">
+      <div class="color_bar" style="background: #39474a"></div>
+      <div class="empty" style="text-align: center">No products, yet.</div>
+    </div>
+  </script>
+  <script id="manager-employee-template" type="text/x-handlebars-template">
+      <div class="people clearfix"><a href="{{url}}">{{name}}</a><div class="revenue">{{revenue}}</div></div>
+  </script>
+  <script id="manager-empty-employee-template" type="text/x-handlebars-template">
+    <div class="empty" style="text-align: center" id="empty-employee-div">No employees, yet.</div>
+  </script>
 <% else %>
   <script id="sale-template" type="text/x-handlebars-template">
     <div class="full_width_white_box_container product_box clearfix">
@@ -55,14 +67,26 @@
       </div>
     </div>
   </script>
+  <script id="empty-sale-template" type="text/x-handlebars-template">
+    <div class="full_width_white_box_container product_box clearfix" id="empty-sale-div" style="text-align: center">
+      <div class="color_bar" style="background: #39474a"></div>
+      <div class="empty">No sales, yet.</div>
+    </div>
+  </script>
   <script id="employee-product-template" type="text/x-handlebars-template">
     <div class="full_width_white_box_container product_box clearfix">
       <div class="color_bar" style="background: {{color}}"></div>
       <div class="contents">
         {{title}}
-        <div class="right">{{numberSold}}</div>
+        <div class="right">{{numberSold}} Sold</div>
         <div class="sub">Price: {{price}} | {{commission}}</div>
       </div>
+    </div>
+  </script>
+  <script id="empty-employee-product-template" type="text/x-handlebars-template">
+    <div class="full_width_white_box_container product_box clearfix" id="empty-employee-product-div" style="text-align: center">
+      <div class="color_bar" style="background: #39474a"></div>
+      <div class="empty">No products sold, yet.</div>
     </div>
   </script>
 <% end %>

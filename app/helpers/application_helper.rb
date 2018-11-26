@@ -14,7 +14,7 @@ module ApplicationHelper
   end
 
   def is_current_users_profile?
-    current_user.id == @user.id
+    (current_user.id == @user.id) && (params[:controller] == 'users' && params[:action] == 'show')
   end
 
   def is_current_users_employee?

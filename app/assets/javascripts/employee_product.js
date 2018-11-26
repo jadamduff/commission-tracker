@@ -30,7 +30,7 @@ EmployeeProduct.prototype.updateSoldProducts = function() {
     $productDiv.find('.display-number-sold').text(this.numberSold + " Sold");
   } else {
     let html = EmployeeProduct.template(this);
-    $('.body-right').append(html);
+    $('.body_right').append(html);
   }
 }
 

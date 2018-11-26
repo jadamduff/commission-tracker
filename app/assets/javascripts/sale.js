@@ -9,6 +9,19 @@ function Sale(attributes) {
   this.isFree = attributes['is-free'];
 }
 
+Sale.loadSales = function(sales) {
+  if (sales.length > 0) {
+    for (const sale of sales) {
+      let saleObj = new Sale(sale);
+      let saleDiv = saleObj.renderSaleDiv();
+      $('#sales_header').after(saleDiv);
+    }
+  } else {
+    let emptyDiv = Sale.emptyTemplate();
+    $('#sales_header').after(emptyDiv);
+  }
+}
+
 Sale.prototype.renderSaleDiv = function() {
   return Sale.template(this);
 }
@@ -59,6 +72,8 @@ Sale.formSubmitListener = function() {
 Sale.ready = function() {
   Sale.templateSource = $('#sale-template').html();
   Sale.template = Handlebars.compile(Sale.templateSource);
+  Sale.emptyTemplateSource = $('#empty-sale-template').html();
+  Sale.emptyTemplate = Handlebars.compile(Sale.emptyTemplateSource);
   Sale.formSubmitListener();
 }
 

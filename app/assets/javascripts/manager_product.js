@@ -9,8 +9,47 @@ function ManagerProduct(attributes) {
   this.isFree = attributes['is-free'];
 }
 
+ManagerProduct.loadProducts = function(products) {
+  if (products.length > 0) {
+    for (const product of products) {
+      let productObj = new ManagerProduct(product);
+      let productDiv = productObj.renderProductDiv();
+      $('#manager_products_header').after(productDiv);
+    }
+  } else {
+    let productDiv = ManagerProduct.renderEmptyProductDiv();
+    $('#manager_products_header').after(productDiv);
+  }
+}
+
+ManagerProduct.loadHotProducts = function() {
+  let userId = $('#hot_products_container')[0].dataset.id;
+  $.get('/hot_products', function(data) {
+    console.log(data);
+    let productsArr = data.data
+    if (productsArr.length > 0) {
+      for (const product of productsArr) {
+        let productObj = new ManagerProduct(product.attributes.data);
+        let productDiv = productObj.renderProductDiv();
+        $('#hot_products_container').append(productDiv);
+      }
+    } else {
+      let emptyDiv = ManagerProduct.renderEmptyHotProductsDiv();
+      $('#hot_products_container').append(emptyDiv);
+    }
+  })
+}
+
 ManagerProduct.prototype.renderProductDiv = function() {
   return ManagerProduct.template(this);
+}
+
+ManagerProduct.renderEmptyProductDiv = function() {
+  return ManagerProduct.emptyTemplate();
+}
+
+ManagerProduct.renderEmptyHotProductsDiv = function() {
+  return ManagerProduct.emptyHotProductTemplate();
 }
 
 ManagerProduct.success = function(data) {
@@ -55,15 +94,11 @@ ManagerProduct.handleResponse = function(data) {
 }
 
 ManagerProduct.rgbConverter = function(rgb) {
-  var rgbvals = /rgb\((.+),(.+),(.+)\)/i.exec(rgb);
-  var rval = parseInt(rgbvals[1]);
-  var gval = parseInt(rgbvals[2]);
-  var bval = parseInt(rgbvals[3]);
-  return '#' + (
-    rval.toString(16) +
-    gval.toString(16) +
-    bval.toString(16)
-  ).toUpperCase();
+ rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
+ return (rgb && rgb.length === 4) ? "#" +
+  (("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+  ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+  ("0" + parseInt(rgb[3],10).toString(16)).slice(-2)).toUpperCase() : '';
 }
 
 ManagerProduct.formColorPicker = function() {
@@ -74,7 +109,6 @@ ManagerProduct.formColorPicker = function() {
 }
 
 ManagerProduct.formSubmitListener = function() {
-  console.log('worked');
   $('#new_product').on('submit', function(e) {
     e.preventDefault();
     let $form = $(this);
@@ -84,10 +118,17 @@ ManagerProduct.formSubmitListener = function() {
   })
 }
 
+ManagerProduct.hotProductsReady = function() {
+  ManagerProduct.emptyHotProductTemplateSource = $('#manager-hot-product-empty-template').html();
+  ManagerProduct.emptyHotProductTemplate = Handlebars.compile(ManagerProduct.emptyHotProductTemplateSource);
+  ManagerProduct.loadHotProducts();
+}
 
 ManagerProduct.ready = function() {
   ManagerProduct.templateSource = $('#manager-product-template').html();
   ManagerProduct.template = Handlebars.compile(ManagerProduct.templateSource);
+  ManagerProduct.emptyTemplateSource = $('#manager-empty-product-template').html();
+  ManagerProduct.emptyTemplate = Handlebars.compile(ManagerProduct.emptyTemplateSource);
   ManagerProduct.formColorPicker();
   ManagerProduct.formSubmitListener();
 }
@@ -95,5 +136,8 @@ ManagerProduct.ready = function() {
 $(document).on('turbolinks:load', function() {
   if ($('#manager-product-template').length > 0) {
     ManagerProduct.ready();
+  }
+  if ($('#manager-hot-product-empty-template').length > 0) {
+    ManagerProduct.hotProductsReady();
   }
 })

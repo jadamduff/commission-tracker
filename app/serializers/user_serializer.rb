@@ -2,7 +2,7 @@ class UserSerializer < ActiveModel::Serializer
   attributes :id, :name, :is_manager
   attribute :manager_data, if: :is_manager
   attribute :employee_data, if: :is_employee
-  
+
   def is_manager
     self.object.is_manager?
   end
@@ -37,7 +37,8 @@ class UserSerializer < ActiveModel::Serializer
         employees: self.object.employees.map do |employee|
           {
             name: employee.name,
-            revenue: employee.revenue
+            revenue: employee.revenue,
+            url: '/users/' + employee.manager_id.to_s + '/employees/' + employee.id.to_s
           }
         end
       }
@@ -51,17 +52,6 @@ class UserSerializer < ActiveModel::Serializer
           name: User.find(self.object.manager_id).name,
           url: '/users/' + User.find(self.object.manager_id).id.to_s
         },
-      sales: self.object.sales.map do |sale|
-        {
-          product_title: sale.product.title,
-          earnings: sale.display_earnings,
-          total: sale.display_total,
-          commission: sale.product.commission_to_percent + '% Commission',
-          quantity: sale.quantity,
-          is_free?: sale.product.is_free?,
-          product_color: sale.product.color
-        }
-      end,
 
       manager_products: Product.where('manager_id = ?', self.object.manager_id).map do |product|
         {
@@ -70,14 +60,27 @@ class UserSerializer < ActiveModel::Serializer
         }
       end,
 
+      sales: self.object.sales.map do |sale|
+        {
+          id: sale.id,
+          earnings: sale.display_earnings,
+          total: sale.display_total,
+          quantity: sale.quantity,
+          productColor: sale.product.color,
+          productTitle: sale.product.title,
+          commission: sale.product.commission_to_percent + '% Commission',
+          isFree: sale.product.is_free?
+        }
+      end,
+
       products_sold: self.object.products.map do |product|
         {
           id: product.id,
           title: product.title,
-          number_sold: number_sold(product.id),
           price: product.display_price,
           commission: product.commission_to_percent + '% Commission',
-          is_free?: product.is_free?,
+          isFree: product.is_free?,
+          numberSold: number_sold(product.id),
           color: product.color
         }
       end
