@@ -74,17 +74,23 @@
     </div>
   </script>
   <script id="employee-product-template" type="text/x-handlebars-template">
-    <div class="full_width_white_box_container product_box clearfix">
+    <div class="full_width_white_box_container product_box employee_product clearfix" id="employee-product-{{id}}" data-product-id="{{id}}">
       <div class="color_bar" style="background: {{color}}"></div>
       <div class="contents">
-        {{title}}
-        <div class="right">{{numberSold}} Sold</div>
-        <div class="sub">Price: {{price}} | {{commission}}</div>
+        <span class="product-title">{{title}}</span>
+        <div class="right display-number-sold">{{numberSold}} Sold</div>
+        <div class="sub">
+          {{#if isFree}}
+            FREE
+          {{else}}
+            Price: {{price}} | {{commission}}
+          {{/if}}
+        </div>
       </div>
     </div>
   </script>
   <script id="empty-employee-product-template" type="text/x-handlebars-template">
-    <div class="full_width_white_box_container product_box clearfix" id="empty-employee-product-div" style="text-align: center">
+    <div class="full_width_white_box_container product_box clearfix" id="productsSoldEmpty" style="text-align: center">
       <div class="color_bar" style="background: #39474a"></div>
       <div class="empty">No products sold, yet.</div>
     </div>

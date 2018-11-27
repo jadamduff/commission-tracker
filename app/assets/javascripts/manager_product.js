@@ -56,6 +56,7 @@ ManagerProduct.success = function(data) {
   console.log(data);
   let product = new ManagerProduct(data.data.attributes.data);
   let productDiv = product.renderProductDiv();
+  $('#empty-manager-product-div').remove();
   $('#manager_products_header').after(productDiv);
   closeForm($('.button'), 'New Product');
 }

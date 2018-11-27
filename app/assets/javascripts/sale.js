@@ -31,6 +31,8 @@ Sale.success = function(data) {
   let product = new EmployeeProduct(data.data.attributes.data.product);
   let saleDiv = sale.renderSaleDiv();
   product.updateSoldProducts();
+  $('#empty-sale-div').remove();
+  $('#productsSoldEmpty').remove();
   $('#sales_header').after(saleDiv);
   $('.earnings').text(data.data.attributes.data['total-earnings']);
   closeForm($('.button'), 'New Sale');

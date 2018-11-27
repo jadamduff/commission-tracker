@@ -29,8 +29,10 @@ EmployeeProduct.prototype.updateSoldProducts = function() {
     let $productDiv = $('#employee-product-' + this.id);
     $productDiv.find('.display-number-sold').text(this.numberSold + " Sold");
   } else {
+    productsSoldIds.push(this.id);
     let html = EmployeeProduct.template(this);
     $('.body_right').append(html);
+    console.log(productsSoldIds);
   }
 }
 
